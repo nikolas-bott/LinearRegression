@@ -6,6 +6,7 @@ class PointCollection:
         self.points.append(point)
         
     def getPoints(self):
+        print("Called",self.points)
         return self.points
     
     def sigma_x(self):
