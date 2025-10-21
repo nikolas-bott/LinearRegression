@@ -5,7 +5,9 @@ point_c = (2,1.5)
 all_points = [point_a, point_b, point_c]
 
 def main():
-    print(f(2,2,all_points))
+    print(m(all_points))
+    print(n(m(all_points), all_points))
+    
     return
    
 # funktion aufgelöst für den geringsten abstand für einen Punkt |==| beispiel mit zwei punkten 
@@ -29,10 +31,11 @@ def main():
 # ==> (∑(​​)) = k <-> i guess
 #
 # TODO: für m(n) n(m) einsetzten:
-# m(n(m)) =
+# m(n(m)) = (∑xy * ∑() - ∑x*∑y) / (∑x² * ∑() - (∑x)²)
 #
 # TODO: für n(m) m(n) einsetzen:
-# n(m(n)) = 
+# n(m(n)) = keine lust werde einfach m in n einsetzten ((:
+
 def f(m, n, all_points):
     value = 0
     
@@ -40,6 +43,49 @@ def f(m, n, all_points):
         value += (point[0] - (m * point[1] + n))
         
     return value
+
+def m(points):
+    m = 0
+    
+    m = (len(points) * getSigmaXY(points) - (getSigmaX(points) * getSigmaY(points))) / (len(points) * getSigmaXSquared(points) - (getSigmaX(points) ** 2))
+    return m
+
+def n(m, points):
+    return (getSigmaY(points)-(m * getSigmaX(points)))/(len(points))
+    
+def getSigmaXY(points):
+    xy = 0 
+    
+    for point in points:
+        xy += point[0] * point[1]
+        
+    return xy
+
+def getSigmaX(points):
+    x = 0
+    
+    for point in points:
+        x += point[0]
+        
+    return x
+
+def getSigmaY(points):
+    y = 0
+    
+    for point in points:
+        y += point[1]
+        
+    return y
+
+def getSigmaXSquared(points):
+    xsquared = 0
+    
+    for point in points:
+        xsquared += point[0] ** 2
+        
+    return xsquared
+
+
     
 if __name__ == "__main__":
     main()
