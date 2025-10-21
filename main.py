@@ -18,9 +18,21 @@ def main():
 # m = y/x - n/x 
 # 
 # ALlgemeine Formel für m: 
-# m = (xᵢ₊₁ * yᵢ₊₁ + ... + xᵢ + yᵢ) - (xᵢ₊₁ + ... + xᵢ)*n / xᵢ₊₁² + ... + xᵢ 
+# m = (xᵢ₊₁ * yᵢ₊₁ + ... + xᵢ + yᵢ) - (xᵢ₊₁ + ... + xᵢ)*n / xᵢ₊₁² + ... + xᵢ  
+# => m = (∑(xᵢyᵢ)​ - n * ∑(xᵢ​)) / (∑(xᵢ²​​)) = m(n)
 #
 # TODO: allgemeine formel für n rausfinden und in formel für n einsetzen und dann code schreiben
+# Allgemeine Formel für n:
+# k = Anzahl an punkten 
+# n = ((yᵢ₊₁ + ... + yᵢ) - (mxᵢ₊₁ + ... + mxᵢ)) / k
+# => n = (∑(yᵢ)​ - m * ∑(xᵢ​)) / (∑(​​)) = n(m)
+# ==> (∑(​​)) = k <-> i guess
+#
+# TODO: für m(n) n(m) einsetzten:
+# m(n(m)) =
+#
+# TODO: für n(m) m(n) einsetzen:
+# n(m(n)) = 
 def f(m, n, all_points):
     value = 0
     
