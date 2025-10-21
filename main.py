@@ -1,91 +1,28 @@
-point_a = (0.5,1)
-point_b = (1,0.5)
-point_c = (2,1.5)
+from LinearRegression import LinearRegression
+from PointCollection import PointCollection
 
-all_points = [point_a, point_b, point_c]
+point_a = (22,11)
+point_b = (12,32)
+point_c = (1,42)
+point_d = (32,23)
+point_e = (54,23)
+
+
 
 def main():
-    print(m(all_points))
-    print(n(m(all_points), all_points))
+    points = PointCollection()
+     
+    points.addPoint(point_a)
+    points.addPoint(point_b)
+    points.addPoint(point_c)
+    points.addPoint(point_d)
+    points.addPoint(point_e)
+    
+    lr = LinearRegression(points)
+    lr.calculate()
+    lr.printFunction()
     
     return
-   
-# funktion aufgelöst für den geringsten abstand für einen Punkt |==| beispiel mit zwei punkten 
-# f(m,n) = n² + y² - 2*x*y*m + 2*y*n + x²*m² + 2*x*m*n |==| f(m,n) = 2n² + y2² - 2*x2*y2*m + 2*y2*n + x2²*m² + 2*x2*m*n
-#
-# Ableitung von f(m) = f'(m)
-# f'(m) = 2mx² + 2xn - 2xy |==| f'(m) = 2*m*x1² + 2*x1*n - 2*x1*y1 + 2*m*x2² + 2*x2*n - 2*x2y2
-#
-# => nach 0 umstellen
-# m = y/x - n/x 
-# 
-# ALlgemeine Formel für m: 
-# m = (xᵢ₊₁ * yᵢ₊₁ + ... + xᵢ + yᵢ) - (xᵢ₊₁ + ... + xᵢ)*n / xᵢ₊₁² + ... + xᵢ  
-# => m = (∑(xᵢyᵢ)​ - n * ∑(xᵢ​)) / (∑(xᵢ²​​)) = m(n)
-#
-# TODO: allgemeine formel für n rausfinden und in formel für n einsetzen und dann code schreiben
-# Allgemeine Formel für n:
-# k = Anzahl an punkten 
-# n = ((yᵢ₊₁ + ... + yᵢ) - (mxᵢ₊₁ + ... + mxᵢ)) / k
-# => n = (∑(yᵢ)​ - m * ∑(xᵢ​)) / (∑(​​)) = n(m)
-# ==> (∑(​​)) = k <-> i guess
-#
-# TODO: für m(n) n(m) einsetzten:
-# m(n(m)) = (∑xy * ∑() - ∑x*∑y) / (∑x² * ∑() - (∑x)²)
-#
-# TODO: für n(m) m(n) einsetzen:
-# n(m(n)) = keine lust werde einfach m in n einsetzten ((:
-
-def f(m, n, all_points):
-    value = 0
-    
-    for point in all_points:
-        value += (point[0] - (m * point[1] + n))
-        
-    return value
-
-def m(points):
-    m = 0
-    
-    m = (len(points) * getSigmaXY(points) - (getSigmaX(points) * getSigmaY(points))) / (len(points) * getSigmaXSquared(points) - (getSigmaX(points) ** 2))
-    return m
-
-def n(m, points):
-    return (getSigmaY(points)-(m * getSigmaX(points)))/(len(points))
-    
-def getSigmaXY(points):
-    xy = 0 
-    
-    for point in points:
-        xy += point[0] * point[1]
-        
-    return xy
-
-def getSigmaX(points):
-    x = 0
-    
-    for point in points:
-        x += point[0]
-        
-    return x
-
-def getSigmaY(points):
-    y = 0
-    
-    for point in points:
-        y += point[1]
-        
-    return y
-
-def getSigmaXSquared(points):
-    xsquared = 0
-    
-    for point in points:
-        xsquared += point[0] ** 2
-        
-    return xsquared
-
-
     
 if __name__ == "__main__":
     main()

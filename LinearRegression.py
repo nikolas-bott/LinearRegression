@@ -1,0 +1,47 @@
+class LinearRegression:
+    def __init__(self, points):
+        self.points = points
+        self.m = 0
+        self.n = 0
+        
+    def calc_m(self):
+        return ((self.points.count() * self.points.sigma_xy() - (self.points.sigma_x() * self.points.sigma_y())) /
+                (self.points.count() * self.points.sigma_x_squared() - (self.points.sigma_x() ** 2)))
+
+    def calc_n(self):
+        return (self.points.sigma_y()-(self.m * self.points.sigma_x()))/(self.points.count())
+        
+    def calculate(self):
+        self.m = self.calc_m()
+        self.n = self.calc_n()
+        
+    def printFunction(self):
+        print(f"t(x) = {self.m}x + {self.n}")
+
+#! How did I calculate the formulas: =>       
+#   
+# funktion aufgelöst für den geringsten abstand für einen Punkt |==| beispiel mit zwei punkten 
+# f(m,n) = n² + y² - 2*x*y*m + 2*y*n + x²*m² + 2*x*m*n |==| f(m,n) = 2n² + y2² - 2*x2*y2*m + 2*y2*n + x2²*m² + 2*x2*m*n
+#
+# Ableitung von f(m) = f'(m)
+# f'(m) = 2mx² + 2xn - 2xy |==| f'(m) = 2*m*x1² + 2*x1*n - 2*x1*y1 + 2*m*x2² + 2*x2*n - 2*x2y2
+#
+# => nach 0 umstellen
+# m = y/x - n/x 
+# 
+# ALlgemeine Formel für m: 
+# m = (xᵢ₊₁ * yᵢ₊₁ + ... + xᵢ + yᵢ) - (xᵢ₊₁ + ... + xᵢ)*n / xᵢ₊₁² + ... + xᵢ  
+# => m = (∑(xᵢyᵢ)​ - n * ∑(xᵢ​)) / (∑(xᵢ²​​)) = m(n)
+#
+# TODO: allgemeine formel für n rausfinden und in formel für n einsetzen und dann code schreiben
+# Allgemeine Formel für n:
+# k = Anzahl an punkten 
+# n = ((yᵢ₊₁ + ... + yᵢ) - (mxᵢ₊₁ + ... + mxᵢ)) / k
+# => n = (∑(yᵢ)​ - m * ∑(xᵢ​)) / (∑(​​)) = n(m)
+# ==> (∑(​​)) = k <-> i guess
+#
+# TODO: für m(n) n(m) einsetzten:
+# m(n(m)) = (∑xy * ∑() - ∑x*∑y) / (∑x² * ∑() - (∑x)²)
+#
+# TODO: für n(m) m(n) einsetzen:
+# n(m(n)) = keine lust werde einfach m in n einsetzten ((:
